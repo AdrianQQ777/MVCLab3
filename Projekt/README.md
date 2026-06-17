@@ -54,7 +54,7 @@ npm run dev
 ```
 
 Przykład frontendu po uruchomieniu:
-* Otwórz stronę http://localhost:5173/REST_Project/
+* Otwórz stronę http://localhost:5173/MVCLab3/
 * Sprawdź, czy frontend działa poprawnie
 
 
@@ -89,5 +89,5 @@ Przykład backendu po uruchomieniu przez Docker:
 
 GitHub Actions realizuje automatyczne wdrożenie: każdy commit do `main` aktualizuje backend i frontend w chmurze po następnych linkach:
 
-- 🔗 Backend (API): https://rest-project-backend.onrender.com/api/
+- 🔗 Backend (API): https://mvclab3.onrender.com/api
 - 🔗 Frontend: https://anahoreth1.github.io/REST_Project/

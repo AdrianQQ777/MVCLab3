@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-cv!!j&&49ycp7(_-mgy*t)y1lrw0u0@_=gk36+9a$-%_mbl()e
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "rest-project-backend.onrender.com",
+    "mvclab3.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
