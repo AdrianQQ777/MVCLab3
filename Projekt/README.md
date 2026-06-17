@@ -90,4 +90,4 @@ Przykład backendu po uruchomieniu przez Docker:
 GitHub Actions realizuje automatyczne wdrożenie: każdy commit do `main` aktualizuje backend i frontend w chmurze po następnych linkach:
 
 - 🔗 Backend (API): https://mvclab3.onrender.com/api
-- 🔗 Frontend: https://anahoreth1.github.io/REST_Project/
+- 🔗 Frontend: 
