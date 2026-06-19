@@ -1,0 +1,72 @@
+{% extends "auctions/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-dark text-white">
+        <h1 class="mb-0">{{ title }}</h1>
+    </div>
+
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                <strong>Popraw błędy w formularzu.</strong>
+                {{ form.errors }}
+            </div>
+            {% endif %}
+
+            <div class="mb-3">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.category.label_tag }}
+                {{ form.category }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.starting_price.label_tag }}
+                {{ form.starting_price }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.start_date.label_tag }}
+                {{ form.start_date }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.end_date.label_tag }}
+                {{ form.end_date }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.owner_id.label_tag }}
+                {{ form.owner_id }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.status.label_tag }}
+                {{ form.status }}
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Zapisz
+            </button>
+
+            <a href="{% url 'auction-list-page' %}" class="btn btn-secondary">
+                Anuluj
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

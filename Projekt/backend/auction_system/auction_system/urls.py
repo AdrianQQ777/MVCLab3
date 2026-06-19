@@ -25,8 +25,15 @@ from drf_spectacular.views import (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+    # Strony HTML MVC/MVT
+    path("auctions/", include("auctions.page_urls")),
+
+    # REST API
     path("api/", include("users.urls")),
     path("api/", include("auctions.urls")),
+
+    # Dokumentacja API
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/docs/",

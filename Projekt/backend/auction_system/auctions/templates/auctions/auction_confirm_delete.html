@@ -1,0 +1,30 @@
+{% extends "auctions/base.html" %}
+
+{% block title %}Usuń aukcję{% endblock %}
+
+{% block content %}
+<div class="card border-danger">
+    <div class="card-header bg-danger text-white">
+        <h1 class="mb-0">Usuwanie aukcji</h1>
+    </div>
+
+    <div class="card-body">
+        <p>
+            Czy na pewno chcesz usunąć aukcję:
+            <strong>{{ auction.name }}</strong>?
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <button type="submit" class="btn btn-danger">
+                Tak, usuń
+            </button>
+
+            <a href="{% url 'auction-detail-page' auction.pk %}" class="btn btn-secondary">
+                Anuluj
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

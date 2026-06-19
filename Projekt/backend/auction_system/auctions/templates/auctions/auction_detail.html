@@ -1,0 +1,105 @@
+{% extends "auctions/base.html" %}
+
+{% block title %}Szczegóły aukcji{% endblock %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-header bg-dark text-white">
+        <h2 class="mb-0">{{ auction.name }}</h2>
+    </div>
+
+    <div class="card-body">
+        <p><strong>Opis:</strong> {{ auction.description }}</p>
+        <p><strong>Kategoria:</strong> {{ auction.category }}</p>
+        <p><strong>Cena wywoławcza:</strong> {{ auction.starting_price }} zł</p>
+        <p><strong>Aktualna cena:</strong> {{ auction.current_price }} zł</p>
+        <p><strong>Data rozpoczęcia:</strong> {{ auction.start_date|date:"d.m.Y H:i" }}</p>
+        <p><strong>Data zakończenia:</strong> {{ auction.end_date|date:"d.m.Y H:i" }}</p>
+        <p><strong>ID właściciela:</strong> {{ auction.owner_id }}</p>
+
+        <p>
+            <strong>Status:</strong>
+            {% if auction.status == "active" %}
+            <span class="badge bg-success">Aktywna</span>
+            {% else %}
+            <span class="badge bg-secondary">Zakończona</span>
+            {% endif %}
+        </p>
+
+        <a href="{% url 'auction-update-page' auction.pk %}" class="btn btn-warning">
+            Edytuj
+        </a>
+
+        <a href="{% url 'auction-delete-page' auction.pk %}" class="btn btn-danger">
+            Usuń
+        </a>
+
+        <a href="{% url 'auction-list-page' %}" class="btn btn-secondary">
+            Powrót do listy
+        </a>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3 class="mb-0">Złóż ofertę</h3>
+    </div>
+
+    <div class="card-body">
+        {% if auction.status == "active" %}
+        <form method="post" action="{% url 'auction-bid-page' auction.pk %}">
+            {% csrf_token %}
+
+            {% if bid_form.errors %}
+            <div class="alert alert-danger">
+                {{ bid_form.errors }}
+            </div>
+            {% endif %}
+
+            <div class="mb-3">
+                {{ bid_form.amount.label_tag }}
+                {{ bid_form.amount }}
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Złóż ofertę
+            </button>
+        </form>
+        {% else %}
+        <div class="alert alert-warning">
+            Ta aukcja jest zakończona. Nie można już składać ofert.
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="mb-0">Historia ofert</h3>
+    </div>
+
+    <div class="card-body">
+        {% if bids %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Kwota</th>
+                    <th>Data złożenia</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for bid in bids %}
+                <tr>
+                    <td>{{ bid.amount }} zł</td>
+                    <td>{{ bid.created_at|date:"d.m.Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>Brak ofert dla tej aukcji.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
